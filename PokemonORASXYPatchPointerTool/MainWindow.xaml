@@ -1,0 +1,34 @@
+﻿<Window x:Class="PokemonORASXYPatchPointerTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PokemonORASXYPatchPointerTool"
+        mc:Ignorable="d"
+        Title="Pokemon ORASXY Patch Pointer Tool" Height="110" Width="350" MinHeight="150"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!-- Add more RowDefinitions if needed -->
+        </Grid.RowDefinitions>
+
+        <!-- Patch Path Selector -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="PatchPathTextBox" Text="Path to Patch" VerticalAlignment="Center" IsReadOnly="True" Width="200"/>
+            <Button Content="Select Patch Path" Click="SelectPatchPath_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <!-- Extracted Cia Path Selector -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="CiaPathTextBox" Text="Path to Extracted Cia" VerticalAlignment="Center" IsReadOnly="True" Width="200"/>
+            <Button Content="Select CIA Path" Click="SelectCiaPath_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        
+        <Button Grid.Row="2" Content="Make patch" Click="MakePatch_Click" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+    </Grid>
+    
+</Window>
