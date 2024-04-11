@@ -3,7 +3,7 @@
 This tool is designed to facilitate working with updates for Pokemon Omega Ruby, Pokemon Alpha Sapphire, Pokemon X, and Pokemon Y games on the Nintendo 3DS console. It provides the ability to replace and add paths to `.garc` files inside the executable file (`code.bin`), allowing the integration of mods and translations directly into the official game versions.
 
 ## Features
-- Replace and add paths to `.rom` files inside update executable files for Pokemon ORAS and XY games.
+- Replace and add paths to `.garc` files inside update executable files for Pokemon ORAS and XY games.
 - Support for including mods and translations for RomFS inside CIA files for the Nintendo 3DS.
 
 ## How to Use
