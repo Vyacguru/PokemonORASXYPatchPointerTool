@@ -53,7 +53,6 @@ public partial class MainWindow : Window
         if (!Path.Exists(patchPath) || !Path.Exists(ciaPath))
         {
             MessageBox.Show("One or both of the selected folders do not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
         }
         else
         {

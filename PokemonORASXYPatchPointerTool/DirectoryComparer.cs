@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace PokemonORASXYPatchPointerTool
 {
@@ -38,7 +37,7 @@ namespace PokemonORASXYPatchPointerTool
             IEnumerable<string> uniqueInPatch = patchPaths.Except(commonPaths);
             foreach (var patchedFile in uniqueInPatch)
             {
-                    ctrMount.ReplacePathsInElf(_targetElfPath, "rom:/a/" + patchedFile, "rom2:/a" + patchedFile);    
+                    ctrMount.ReplacePathsInElf(_targetElfPath, "rom:/" + patchedFile, "rom2:/" + patchedFile.Replace("a\\", "a"));    
                     Console.WriteLine($"Patched {patchedFile}");
                     
                     string destinationPath = Path.Combine(romFs.FullName.Replace("\\a", ""), patchedFile.Replace("a\\", "a").Replace("\\", Path.DirectorySeparatorChar.ToString()));
@@ -67,7 +66,7 @@ namespace PokemonORASXYPatchPointerTool
         
         static string GetPathAfterA(string fullPath)
         {
-            int index = fullPath.IndexOf("a\\");
+            int index = fullPath.IndexOf("a\\", StringComparison.Ordinal);
             if (index != -1)
             {
                 return fullPath.Substring(index);

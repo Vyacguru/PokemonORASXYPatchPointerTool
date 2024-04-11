@@ -20,9 +20,10 @@ namespace PokemonORASXYPatchPointerTool
             byte[] originalData = File.ReadAllBytes(elfPath);
 
             // Convert rom and patch paths to byte arrays
-            byte[] romPath = Encoding.UTF8.GetBytes(oldPath.Replace('\\', '/'));
-            byte[] patchPath = Encoding.UTF8.GetBytes(newPath.Replace('\\', '/'));
+            byte[] romPath = Encoding.Unicode.GetBytes(oldPath.Replace('\\', '/'));
+            byte[] patchPath = Encoding.Unicode.GetBytes(newPath.Replace('\\', '/'));
             
+            Console.WriteLine($"Original path: {Encoding.Unicode.GetString(romPath)} Patched path: {Encoding.Unicode.GetString(patchPath)}");
             // Find the index of the old path in the Elf file
             int indexOfRomPath = FindIndexOfBytes(originalData, romPath);
             if (indexOfRomPath < 0)
@@ -55,26 +56,23 @@ namespace PokemonORASXYPatchPointerTool
         /// <returns>The index of the byte sequence, or -1 if not found.</returns>
         private static int FindIndexOfBytes(byte[] searchBuffer, byte[] bytesToFind)
         {
-            // Check if searchBuffer is shorter than bytesToFind
-            if (searchBuffer.Length == 0 || bytesToFind.Length == 0 || searchBuffer.Length < bytesToFind.Length)
+            for (int index1 = 0; index1 < searchBuffer.Length - bytesToFind.Length; ++index1)
             {
-                // If either array is empty or if searchBuffer is shorter than bytesToFind, throw an exception
-                throw new ArgumentException("Invalid search buffer or bytes to find.");
+                bool flag = true;
+                for (int index2 = 0; index2 < bytesToFind.Length; ++index2)
+                {
+                    if (searchBuffer[index1 + index2] != bytesToFind[index2])
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag)
+                    return index1;
             }
 
-            // Iterate through searchBuffer
-            for (int index = 0; index <= searchBuffer.Length - bytesToFind.Length; index++)
-            {
-                // Check if the byte sequence matches at the current index
-                bool found = !bytesToFind.Where((t, j) => searchBuffer[index + j] != t).Any();
-                if (found)
-                {
-                    return index; // Return the index of the byte sequence
-                }
-            }
-            
-            // If the byte sequence is not found, throw an exception
-            throw new InvalidOperationException("Bytes to find not found in search buffer.");
+            return -1;
         }
     }
 }
